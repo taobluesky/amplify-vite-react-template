@@ -18,7 +18,7 @@ export const handler: AppSyncAuthorizerHandler<ResolverContext> = async (
     requestContext: { apiId, accountId }
   } = event;
   const response = {
-    isAuthorized: authorizationToken === 'custom-authorized',
+    isAuthorized: authorizationToken === 'test-token123',
     resolverContext: {
       // eslint-disable-next-line spellcheck/spell-checker
       userid: 'user-id',
