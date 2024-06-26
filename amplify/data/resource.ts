@@ -1,4 +1,9 @@
-import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { 
+  type ClientSchema, 
+  a, 
+  defineData,
+  defineFunction,
+} from "@aws-amplify/backend";
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -11,7 +16,7 @@ const schema = a.schema({
     .model({
       content: a.string(),
     })
-    .authorization((allow) => [allow.publicApiKey()]),
+    .authorization((allow) => [allow.custom()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -19,10 +24,21 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
+    // defaultAuthorizationMode: "apiKey",
     // API Key is used for a.allow.public() rules
-    apiKeyAuthorizationMode: {
-      expiresInDays: 30,
+    // apiKeyAuthorizationMode: {
+    //   expiresInDays: 30,
+    // },
+    defaultAuthorizationMode: 'lambda',
+    // STEP 2
+    // Pass in the function to be used for a custom authorization rule
+    lambdaAuthorizationMode: {
+      function: defineFunction({
+        entry: './custom-authorizer.ts',
+      }),
+      // (Optional) STEP 3
+      // Configure the token's time to live
+      timeToLiveInSeconds: 300,
     },
   },
 });
