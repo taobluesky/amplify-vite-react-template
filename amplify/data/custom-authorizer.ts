@@ -13,7 +13,7 @@ const url = ' https://concordbus2-dev.vetrackr.com/oauth/verify';
 const verifyToken = async (token:String): Promise<boolean> => {
   try {
     const response = await fetch(url, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
