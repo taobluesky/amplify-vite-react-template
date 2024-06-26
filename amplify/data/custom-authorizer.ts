@@ -8,7 +8,7 @@ interface ApiResponse {
   verified: boolean;
 }
 
-const url = ' https://concordbus2-dev.vetrackr.com/oauth/verify';
+const url = 'https://concordbus2-dev.vetrackr.com/oauth/verify';
 
 const verifyToken = async (token:String): Promise<boolean> => {
   try {
@@ -18,7 +18,7 @@ const verifyToken = async (token:String): Promise<boolean> => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        toekn: token
+        token: token
       })
     });
 
