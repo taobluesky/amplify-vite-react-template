@@ -38,9 +38,9 @@ const verifyToken = async (token:String): Promise<boolean> => {
 };
 
 type ResolverContext = {
-  userid: string;
-  info: string;
-  more_info: string;
+  // userid: string;
+  // info: string;
+  // more_info: string;
 };
 
 export const handler: AppSyncAuthorizerHandler<ResolverContext> = async (
@@ -57,15 +57,15 @@ export const handler: AppSyncAuthorizerHandler<ResolverContext> = async (
     isAuthorized: verified,  //authorizationToken === 'test-token123',
     resolverContext: {
       // eslint-disable-next-line spellcheck/spell-checker
-      userid: 'user-id',
-      info: 'contextual information A',
-      more_info: 'contextual information B'
+      // userid: 'user-id',
+      // info: 'contextual information A',
+      // more_info: 'contextual information B'
     },
     deniedFields: [
       `arn:aws:appsync:${process.env.AWS_REGION}:${accountId}:apis/${apiId}/types/Event/fields/comments`,
       `Mutation.createEvent`
     ],
-    ttlOverride: 300
+    ttlOverride: 3600
   };
   console.log(`RESPONSE: ${JSON.stringify(response, null, 2)}`);
   return response;

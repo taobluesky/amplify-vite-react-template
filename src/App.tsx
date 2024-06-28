@@ -4,15 +4,13 @@ import '@aws-amplify/ui-react/styles.css'
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
-// import { useLocation } from 'react-router-dom';
 
 const useQuery = () => {
   return new URLSearchParams(window.location.search);
-  // return new URLSearchParams(useLocation().search);
 };
 
 function App() {
-  const lambdaAuthToken = useQuery().get('token');//'test-token123';//getAuthToken();
+  const lambdaAuthToken = useQuery().get('rt');  //token
 
   console.log(`token: ${lambdaAuthToken}`);
 
@@ -31,11 +29,7 @@ function App() {
 
   function createTodo() {
     client.models.Todo.create(
-      { content: window.prompt("Todo content") }, 
-      // { 
-      //   authMode: 'lambda',
-      //   authToken: lambdaAuthToken,
-      // }
+      { content: window.prompt("Todo content") }
     );
   }
 
